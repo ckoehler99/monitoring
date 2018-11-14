@@ -11,7 +11,7 @@ services:
     volumes:
       - ../Docker_Monitoring_Data/mysql/datadir:/var/lib/mysql
     networks:
-      - backend
+      - monitoring
 
   json_exporter:
     build: ./json_exporter
@@ -112,7 +112,7 @@ services:
     links:
       - mysql
     networks:
-      - backend
+      - monitoring
     env_file:
       - ./mysqlexporter/env
     depends_on:
@@ -156,7 +156,7 @@ services:
     ports:
      - 80:8081
     networks:
-      - backend
+      - monitoring
     volumes:
      - ../Docker_Monitoring_Data/artifactory:/var/opt/jfrog/artifactory
 #    Add extra Java options by uncommenting the following lines
@@ -176,7 +176,7 @@ services:
     ports:
       - 8080:8085
     networks:
-      - backend
+      - monitoring
     volumes:
       - ../Docker_Monitoring_Data/jenkins:/var/jenkins_home
 networks:
