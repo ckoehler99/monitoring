@@ -142,8 +142,6 @@ services:
     volumes:
       - ./grafana/etc:/etc/grafana
       - ../Docker_Monitoring_Data/grafana/data:/var/lib/grafana
-    depends_on:
-      - prometheus2
     ports:
       - "3001:3001"
     networks:
