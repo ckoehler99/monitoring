@@ -40,9 +40,9 @@ services:
       - monitoring
       - backend
 
-  prometheus2:
+  prometheus:
     image: prom/prometheus:latest
-    container_name: prometheus2
+    container_name: prometheus
     volumes:
       - ../Docker_Monitoring_Data/prometheus2:/prometheus
       - ./prometheus/etc:/etc
@@ -53,7 +53,6 @@ services:
       - '9094:9094'
     networks:
       - monitoring
-
 
   node-exporter:
     image: prom/node-exporter
@@ -147,38 +146,3 @@ services:
     networks:
       - monitoring
 
-
-  artifactory:
-    image: docker.bintray.io/jfrog/artifactory-oss:5.9.0
-    container_name: artifactory
-    ports:
-     - 80:8081
-    networks:
-      - monitoring
-    volumes:
-     - ../Docker_Monitoring_Data/artifactory:/var/opt/jfrog/artifactory
-#    Add extra Java options by uncommenting the following lines
-#    environment:
-#     - EXTRA_JAVA_OPTIONS=-Xmx4g
-#    restart: always
-    ulimits:
-      nproc: 65535
-      nofile:
-        soft: 32000
-        hard: 40000
-
-  jenkins:
-    image: jenkins:latest
-    container_name: jenkins
-#    restart: always
-    ports:
-      - 8080:8085
-    networks:
-      - monitoring
-    volumes:
-      - ../Docker_Monitoring_Data/jenkins:/var/jenkins_home
-networks:
-  backend:
-    internal: true
-  monitoring:
-    driver: bridge
