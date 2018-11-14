@@ -16,7 +16,7 @@ wget https://github.com/prometheus/prometheus/releases/download/v2.5.0/prometheu
 
 tar xfvz prometheus-2.5.0.linux-amd64.tar.gz 
 ```
-## Starting Prometheus
+## starting prometheus
 Start Prometheus. By default, Prometheus reads its config from a file called prometheus.yml in the current working directory, and it stores its database in a sub-directory called data, again relative to the current working directory. 
 ```
 ./prometheus 
