@@ -1,0 +1,96 @@
+global:
+  # After an alert is resolved, keep the alert on the Alerts status page.  This
+  # is longer than the default, to help track down false positives or flaky
+  # alerts.
+  resolve_timeout: 60m
+
+# The directory from which notification templates are read.
+# TODO(soltesz): Add directory and actual templates.
+templates:
+- '/etc/alertmanager/template/*.tmpl'
+
+# All incoming alerts are "routed" to a "receiver" based on various criteria.
+# As well, alerts are aggregated in various ways to reduce alert volume.
+route:
+  # Group incoming alerts together with these labels. For example:
+  #   For example: multiple individual alerts for instance=A and
+  #   alertname=LatencyHigh would be batched into a single group.
+  group_by: ['alertname']
+
+  # By default, wait at least 'group_wait' before sending a notification to get
+  # a set of alerts to 'group_by'.
+  group_wait: 30s
+
+  # By default, after the first notification is sent for a group, wait
+  # 'group_interval' before sending another notification for subsequent alerts
+  # in the same group.
+  group_interval: 5m
+
+  # By default, wait 'repeat_interval' before resending an alert.
+  repeat_interval: 3h
+
+  # When no other routes match, use the default receiver.
+  receiver: slack-alerts-email
+
+  # The above attributes are inherited by all child routes. Children can
+  # overwrite any value.
+
+  # The child route trees.
+  routes:
+  # This route performs matches on alert labels to catch alerts that are
+  # related to a specific service.
+  - match:
+      service: federation
+
+    # If the service matches, continue down the child routes. If the severity
+    # of the alert is 'page', then send the notification to an alternative
+    # receiver.
+    routes:
+    - match:
+        severity: page
+      receiver: slack-alerts-page
+
+
+# When two alerts are firing at the same time, we can "inhibit" one based on
+# the other. For example, a host is offline and a service on that host is not
+# running. The second alert is redundant because a service cannot work if the
+# host is offline.
+#
+# Note: Sometimes the ALERT definition can take multiple services into account.
+# But, sometimes it makes more sense to do the suppression here.
+#
+# TODO(soltesz): add hints about when each condition is more appropriate.
+
+inhibit_rules:
+- source_match:
+    severity: 'page'
+  target_match:
+    severity: 'ticket'
+  # Apply inhibition if the group is the same.
+  equal: ['instance', 'service']
+
+
+receivers:
+# For M-Lab Slack, visit:
+#   https://measurementlab.slack.com/apps/manage/custom-integrations
+# Follow the "Incoming WebHooks link", and either add a new configuration or
+# edit one of the existing configurations. Copy the "Webhook URL" from the
+# slack configuration to the `api_url` values below.
+
+- name: 'slack-alerts-page'
+  slack_configs:
+  - send_resolved: true
+    api_url: {{SLACK_CHANNEL_URL}}
+    channel: alerts-{{SHORT_PROJECT}}
+    username: alert-page
+  webhook_configs:
+  - url: '{{GITHUB_RECEIVER_URL}}'
+
+- name: 'slack-alerts-email'
+  slack_configs:
+  - send_resolved: true
+    api_url: {{SLACK_CHANNEL_URL}}
+    channel: alerts-{{SHORT_PROJECT}}
+    username: alert-email
+  webhook_configs:
+  - url: '{{GITHUB_RECEIVER_URL}}'

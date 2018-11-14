@@ -1,0 +1,229 @@
+# M-Lab alert configuration.
+#
+# ALERT <alert name>
+#   IF <expression>
+#   [ FOR <duration> ]
+#   [ LABELS <label set> ]
+#   [ ANNOTATIONS <label set> ]
+#
+## Notes about delay.
+#
+# There are inherent delays in the monitoring and alert pipeline. When
+# designing alerts, remember that each step includes some delay:
+#
+#  * the time between reality changing and monitoring observing the change.
+#  * the time between the observed change and the delay defined by the alert.
+#  * the time between a firing alert and the "group_wait" time in alertmanager.
+#  * the time between sending a notification and the notification arriving.
+#
+# For example, for a 60s collection period, a 2m alert delay, a 30s group_wait,
+# and a 15s-3m SMS delivery delay, the time between reality changing and a
+# human knowing could be over six minutes.
+#
+# Your job is to balance false-positives with responsiveness when necessary.
+
+# ClusterDown: when any of the federated prometheus k8s clusters is down for
+# three sample periods, then raise an alert.
+#
+# All scraper metrics come from federated targets, so this is critical.
+ALERT ClusterDown
+  IF up{job="federation-targets"} == 0
+  FOR 3m
+  LABELS {
+    severity = "page"
+  }
+  ANNOTATIONS {
+    summary = "Instance {{ $labels.instance }} down",
+    description = "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 2 minutes.",
+  }
+
+##
+## SLOs
+##
+
+# MachineSLO
+#
+# SidestreamIsNotRunning: an M-Lab server is online, but the sidestream exporter
+# is not. Since sidestream is a core service, this must be fixed.
+ALERT SidestreamIsNotRunning
+  IF sum_over_time(up{service="sidestream"}[10m]) == 0
+        AND ON(machine)
+           sum_over_time(probe_success{service="ssh806"}[20m]) / 20 >= 0.90
+  FOR 10m
+  LABELS {
+    severity = "page"
+  }
+  ANNOTATIONS {
+    summary = "",
+    description = "",
+  }
+
+
+# ScraperSLO
+#
+# ScraperMostRecentArchivedFileTimeIsTooOld: scraper uploads archives for a
+# machine once a day. If the machine is online (for at least 2 hours), but
+# scraper has not uploaded an archive for that machine for more than 36 hours,
+# there is a problem.
+#
+# TODO(soltesz): remove the != 0 check when legacy records are removed.
+ALERT ScraperMostRecentArchivedFileTimeIsTooOld
+  IF (time() - (scraper_maxrawfiletimearchived{container="scraper-sync"} != 0)) > (36 * 60 * 60)
+        AND ON(machine)
+           (time() - process_start_time_seconds{service="sidestream"}) > (30 * 60 * 60)
+  FOR 10m
+  LABELS {
+    severity = "page"
+  }
+  ANNOTATIONS {
+    summary = "Scraper max file mtime is too old {{ $labels.rsync_url }}",
+    description = "Max file mtime for {{ $labels.rsync_url }} is older than 36 hours.",
+  }
+
+# Scraper internal consistency.
+#
+# Verify that for every running scraper there is a corresponding metric from
+# scraper-sync indicating that a collection was attempted. These should always
+# be in sync with one another.
+#
+# We use scraper_lastcollectionattempt because scraper_maxrawfiletimearchived
+# is not updated until the first successful upload. This is not possible before
+# a machine comes online.
+ALERT ScraperSyncPresentWithoutScraperCollector
+  IF (scraper_lastcollectionattempt{container="scraper-sync"}
+        UNLESS ON(machine, experiment, rsync_module)
+           up{container="scraper"})
+  FOR 3h
+  LABELS {
+    severity = "page"
+  }
+  ANNOTATIONS {
+    summary = "",
+    description = "",
+  }
+
+ALERT ScraperCollectorMissingFromScraperSync
+  IF (up{container="scraper"}
+        UNLESS ON(machine, experiment, rsync_module)
+           scraper_lastcollectionattempt{container="scraper-sync"})
+  FOR 3h
+  LABELS {
+    severity = "page"
+  }
+  ANNOTATIONS {
+    summary = "",
+    description = "",
+  }
+
+##
+## Inventory.
+##
+
+ALERT InventoryConfigurationIsMissing
+  IF absent(up{service="ssh806"}) OR absent(up{service="rsyncd"})
+  FOR 30m
+  LABELS {
+    severity = "ticket"
+  }
+  ANNOTATIONS {
+    summary = "Inventory configuration {{ $labels.service }} is missing.",
+    description = "Machine or rsyncd service configuration has been missing for too long.",
+    hints = "Check the behavior of the m-lab/operator/.travis.yml deployment, the GCS buckets, and the gcp-service-discovery component of prometheus-support.",
+  }
+
+ALERT InventoryMachinesWithoutRsyncd
+  IF up{service="ssh806"} UNLESS ON(machine) up{service="rsyncd"}
+  FOR 30m
+  LABELS {
+    severity = "ticket"
+  }
+  ANNOTATIONS {
+    summary = "Rsyncd configuration is missing from some machines.",
+    hints = "",
+  }
+
+ALERT InventoryRsyncdWithoutMachines
+  IF up{service="rsyncd"} UNLESS ON(machine) up{service="ssh806"}
+  FOR 30m
+  LABELS {
+    severity = "ticket"
+  }
+  ANNOTATIONS {
+    summary = "Machine configuration is missing for some rsyncd services.",
+    hints = "",
+  }
+
+
+##
+## Services.
+##
+
+ALERT SidestreamServicesAreMissing
+  IF absent(up{service="sidestream"})
+  FOR 30m
+  LABELS {
+    severity = "ticket"
+  }
+  ANNOTATIONS {
+    summary = "",
+    hints = "",
+  }
+
+ALERT SidestreamRunningWithoutMachine
+  IF up{service="sidestream"} UNLESS ON(machine) up{service="ssh806"}
+  FOR 30m
+  LABELS {
+    severity = "ticket"
+  }
+  ANNOTATIONS {
+    summary = "",
+    hints = "",
+  }
+
+ALERT MachineWithoutSidestreamRunning
+  IF up{service="ssh806"} UNLESS ON(machine) up{service="sidestream"}
+  FOR 30m
+  LABELS {
+    severity = "ticket"
+  }
+  ANNOTATIONS {
+    summary = "",
+    hints = "",
+  }
+
+# Scrapers are configured on machine "c", but machine "c" is not in the rsyncd inventory.
+ALERT ScraperRunningWithoutRsyncd
+  IF up{container="scraper"} UNLESS ON(machine, experiment) up{service="rsyncd"}
+  FOR 30m
+  LABELS {
+    severity = "ticket"
+  }
+  ANNOTATIONS {
+    summary = "",
+    hints = "",
+  }
+
+# Rsync inventory includes machine "b", but machine "b" does not have a configured scraper.
+ALERT RsyncRunningWithoutScraper
+  IF up{service="rsyncd"} UNLESS ON(machine, experiment) up{container="scraper"}
+  FOR 30m
+  LABELS {
+    severity = "ticket"
+  }
+  ANNOTATIONS {
+    summary = "",
+    hints = "",
+  }
+
+
+# DownloaderIsFailingToUpdate: The downloader hasn't successfully retrieved the files in at least 21 hours, meaning that at least the last two download attempts have failed.
+ALERT DownloaderIsFailingToUpdate
+  IF time()-downloader_last_success_time_seconds > (21 * 60 * 60)
+  FOR 5m
+  LABELS {
+    severity = "page"
+  }
+  ANNOTATIONS {
+    summary = "Neither of the last two attempts to download the maxmind/routeviews feeds were successful.",
+    hints = "Check for errors with the downloader service on grafana with the downloader_Error_Count metric, or check the stackdriver logs for the downloader cluster."
+  }

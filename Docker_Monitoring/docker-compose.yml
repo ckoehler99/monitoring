@@ -1,0 +1,186 @@
+version: "3"
+services:
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    ports:
+      - 6603:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "mypassword"
+    volumes:
+      - ../Docker_Monitoring_Data/mysql/datadir:/var/lib/mysql
+    networks:
+      - backend
+
+  json_exporter:
+    build: ./json_exporter
+    image: codahale:tag
+    ports:
+      - '9101:9101'
+    networks:
+      - monitoring
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    restart: always
+    environment:
+      - BASIC_USER=admin
+      - BASIC_PASSWORD=password
+    volumes:
+     - ./nginx/etc/nginx:/etc/nginx
+     - ./nginx/www/html:/var/www/html
+    ports:
+     - "80:80"
+    environment:
+     - NGINX_HOST=localhost
+     - NGINX_PORT=80
+    networks:
+      - monitoring
+      - backend
+
+  prometheus2:
+    image: prom/prometheus:latest
+    container_name: prometheus2
+    volumes:
+      - ../Docker_Monitoring_Data/prometheus2:/prometheus
+      - ./prometheus/etc:/etc
+    command:
+      - '-config.file=/etc/prometheus.2.yml'
+       #     - '-web.listen-address ":9094"'
+    ports:
+      - '9094:9094'
+    networks:
+      - monitoring
+
+
+  node-exporter:
+    image: prom/node-exporter
+    container_name: node-exporter
+    ports:
+      - '9100:9100'
+    networks:
+      - monitoring
+  
+  blackbox-exporter:
+    image: prom/blackbox-exporter
+    container_name: blackbox-exporter
+    volumes:
+      - ./blackbox-exporter:/etc/blackbox_exporter
+    ports:
+      - '9115:9115'
+    networks:
+      - monitoring
+    environment:
+      - http_proxy=http://squid:3128
+      - HTTP_PROXY=http://squid:3128
+      - https_proxy=http://squid:3128
+      - HTTPS_PROXY=http://squid:3128
+
+  squid:
+    image: minimum2scp/squid
+    container_name: squid
+    volumes:
+      - ./squid/etc:/etc/squid
+    ports:
+      - '3128:3128'
+    networks:
+      - monitoring
+
+  push-gateway:
+    image: redis
+    container_name: push-gateway
+    command:
+      - redis-server
+      - --appendonly
+      - "yes"
+    environment:
+      - REDIS_SERVER=redis:6379
+    restart: always
+    volumes:
+      - ../Docker_Monitoring_Data/redis:/data
+    networks:
+      - monitoring
+
+# Infos unter https://hub.docker.com/r/prom/mysqld-exporter/
+  mysqlexporter:
+    image: prom/mysqld-exporter
+    container_name: mysqlexporter
+    ports: 
+      - 9104:9104
+    links:
+      - mysql
+    networks:
+      - backend
+    env_file:
+      - ./mysqlexporter/env
+    depends_on:
+      - mysql
+      
+  cadvisor:
+    image: google/cadvisor
+    container_name: cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    networks:
+      - monitoring
+    labels:
+      org.label-schema.group: "monitoringcadvisor"
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=pass
+    volumes:
+      - ./grafana/etc:/etc/grafana
+      - ../Docker_Monitoring_Data/grafana/data:/var/lib/grafana
+    depends_on:
+      - prometheus2
+    ports:
+      - "3001:3001"
+    networks:
+      - monitoring
+
+
+  artifactory:
+    image: docker.bintray.io/jfrog/artifactory-oss:5.9.0
+    container_name: artifactory
+    ports:
+     - 80:8081
+    networks:
+      - backend
+    volumes:
+     - ../Docker_Monitoring_Data/artifactory:/var/opt/jfrog/artifactory
+#    Add extra Java options by uncommenting the following lines
+#    environment:
+#     - EXTRA_JAVA_OPTIONS=-Xmx4g
+#    restart: always
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 32000
+        hard: 40000
+
+  jenkins:
+    image: jenkins:latest
+    container_name: jenkins
+#    restart: always
+    ports:
+      - 8080:8085
+    networks:
+      - backend
+    volumes:
+      - ../Docker_Monitoring_Data/jenkins:/var/jenkins_home
+networks:
+  backend:
+    internal: true
+  monitoring:
+    driver: bridge

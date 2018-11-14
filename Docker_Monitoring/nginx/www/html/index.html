@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- CLEAN MARKUP = GOOD KARMA.
+      Hi source code lover,
+
+      you're a curious person and a fast learner ;)
+      Let's make something beautiful together. Contribute on Github:
+      https://github.com/webslides/webslides
+
+      Thanks,
+      @jlantunez.
+    -->
+
+  <!-- SEO -->
+  <title>Monitoring</title>
+  <meta name="description" content="Monitoring  mit Prometheus und Grafana">
+
+  <!-- URL CANONICAL -->
+  <!-- <link rel="canonical" href="http://your-url.com/"> -->
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext"
+    rel="stylesheet">
+
+  <!-- CSS WebSlides -->
+  <link rel="stylesheet" type='text/css' media='all' href="static/css/webslides.css">
+
+  <!-- Optional - CSS SVG Icons (Font Awesome) -->
+  <link rel="stylesheet" type='text/css' media='all' href="static/css/svg-icons.css">
+
+  <!-- SOCIAL CARDS (ADD YOUR INFO) -->
+
+  <!-- FACEBOOK -->
+  <meta property="og:url" content="http://localhost/">
+  <!-- YOUR URL -->
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="WebSlides — Making HTML Presentations Easy">
+  <!-- EDIT -->
+  <meta property="og:description" content="WebSlides is about telling stories beautifully. Just the essential features. Good karma.">
+  <!-- EDIT -->
+  <meta property="og:updated_time" content="2017-01-04T17:20:50">
+  <!-- EDIT -->
+  <meta property="og:image" content="static/images/share-webslides.jpg">
+  <!-- EDIT -->
+
+  <!-- TWITTER -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@webslides">
+  <!-- EDIT -->
+  <meta name="twitter:creator" content="@jlantunez">
+  <!-- EDIT -->
+  <meta name="twitter:title" content="WebSlides — Making HTML Presentations Easy">
+  <!-- EDIT -->
+  <meta name="twitter:description" content="WebSlides is about good karma. Just essential features. 120+ free slides ready to use.">
+  <!-- EDIT -->
+  <meta name="twitter:image" content="static/images/share-webslides.jpg">
+  <!-- EDIT -->
+
+  <!-- FAVICONS -->
+  <link rel="shortcut icon" sizes="16x16" href="static/images/favicons/favicon.png">
+  <link rel="shortcut icon" sizes="32x32" href="static/images/favicons/favicon-32.png">
+  <link rel="apple-touch-icon icon" sizes="76x76" href="static/images/favicons/favicon-76.png">
+  <link rel="apple-touch-icon icon" sizes="120x120" href="static/images/favicons/favicon-120.png">
+  <link rel="apple-touch-icon icon" sizes="152x152" href="static/images/favicons/favicon-152.png">
+  <link rel="apple-touch-icon icon" sizes="180x180" href="static/images/favicons/favicon-180.png">
+  <link rel="apple-touch-icon icon" sizes="192x192" href="static/images/favicons/favicon-192.png">
+
+  <!-- Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#333333">
+
+</head>
+
+<body>
+  <header role="banner">
+    <nav role="navigation">
+      <p class="logo"><a href="index.html" title="WebSlides">WebSlides</a></p>
+      <ul>
+        <li class="github">
+          <a rel="external" href="https://github.com/ckoehler99" title="Github">
+            <svg class="fa-github">
+              <use xlink:href="#fa-github"></use>
+            </svg>
+            <em>WebSlides</em>
+          </a>
+        </li>
+        <li class="twitter">
+          <a rel="external" href="https://twitter.com/ckoehler99" title="Twitter">
+            <svg class="fa-twitter">
+              <use xlink:href="#fa-twitter"></use>
+            </svg>
+            <em>@CK</em>
+          </a>
+        </li>
+        <!--  <li class="dribbble"><a rel="external" href="http://dribbble.com/webslides" title="Dribbble"><svg class="fa-dribbble"><use xlink:href="#fa-dribbble"></use></svg> <em>webslides</em></a></li> -->
+      </ul>
+    </nav>
+  </header>
+
+  <main role="main">
+    <article id="webslides">
+      <section class="slide-bottom slide current">
+        <span class="background" style="background-image:url('static/images/mecklenburg.jpg')"></span>
+        <!--.wrap = container (width: 90%) -->
+        <div class="content-center">
+          <h1 style="color:white"><strong>Monitoring</strong></h1>
+          <p style="color:white" class="text-intro">von DEV zu OPS<br>
+          </p>
+          <p>
+            <a href="https://github.com/ckoehler99/monitoring" class="button zoomIn" title="hier geht's zum Projekt">
+                hier geht es zum Projekt
+              </a>
+          </p>
+        </div>
+        <!-- .end .wrap -->
+      </section>
+
+      <section>
+        <!--.wrap = container (width: 90%) -->
+        <div class="wrap">
+          <!-- alignment [class*="content-"] = container max-width:50% = 600px -->
+          <div class="content-center">
+            <h2><strong>Gibt es besondere Erwartungen an den Workshop?</strong></h2>
+            <p>Welchen Ideen/Vorstelleungen gibt es? </p>
+
+          </div>
+        </div>
+        <!-- .end .wrap -->
+      </section>
+      <section class="slide current" style="">
+        <div class="wrap">
+          <h3>Inhalt des Workshops</h3>
+          <ul class="flexblock steps">
+            <!-- li>a? Add blink = <ul class="flexblock steps blink">-->
+            <li>
+              <span>
+                      <svg class="fa-heartbeat" viewBox="0 0 512 512">
+                        
+                      
+          <path d="m366 293l87 0c-1 1-2 2-3 3-1 0-2 1-3 2l0 1-178 171c-4 4-8 5-13 5-5 0-9-1-13-5l-178-172c-1 0-3-2-6-5l106 0c4 0 8-2 11-4 3-3 5-6 6-10l20-80 55 190c1 4 3 7 6 10 3 2 7 3 11 3 4 0 8-1 11-3 3-3 6-6 7-10l41-138 16 32c4 6 9 10 17 10z m146-123c0 28-10 56-29 86l-106 0-32-63c-1-3-4-6-7-8-3-2-7-3-10-2-9 1-14 5-16 13l-37 123-56-196c-1-4-4-7-7-10-3-2-7-3-11-3-4 0-8 1-11 4-4 2-6 5-7 9l-33 133-121 0c-19-30-29-58-29-86 0-42 12-74 36-98 24-24 58-35 101-35 11 0 23 2 36 6 12 4 23 9 34 16 11 7 20 14 27 20 8 6 15 12 22 19 7-7 14-13 22-19 7-6 16-13 27-20 11-7 22-12 34-16 13-4 25-6 36-6 43 0 77 11 101 35 24 24 36 56 36 98z"></path>
+        </svg>
+                    </span>
+              <h2>01. Einführung in das Thema</h2>
+              <p>Was ist Prometheus, was ist Grafana, wie ist die Architektur... </p>
+            </li>
+            <li>
+              <div class="process step-2"></div>
+              <span>
+                      <svg class="fa-magic" viewBox="0 0 512 512">
+    
+          <path d="m358 166l84-84-31-30-83 83z m128-84c0 5-2 10-5 13l-368 368c-3 3-7 5-12 5-6 0-10-2-13-5l-57-57c-3-3-5-8-5-13 0-5 2-9 5-13l368-367c3-4 7-5 12-5 6 0 10 1 13 5l57 56c3 4 5 8 5 13z m-386-54l28 9-28 8-9 28-8-28-28-8 28-9 8-28z m100 46l56 17-56 18-17 56-17-56-56-18 56-17 17-56z m266 137l28 8-28 9-9 28-8-28-28-9 28-8 8-28z m-183-183l28 9-28 8-9 28-8-28-28-8 28-9 8-28z"></path>
+        </svg>
+                    </span>
+              <h2>02. Praktische Einführung</h2>
+              <p>Aufbau eines Monitoringsytems mit Docker und Überwachung von einzelnen Komponenten</p>
+            </li>
+            <li>
+              <div class="process step-3"></div>
+              <span>
+                      <svg class="fa-balance-scale" viewBox="0 0 512 512">
+          <path d="m421 128l-110 201 219 0z m-366 0l-110 201 220 0z m234-55c-2 8-7 15-13 21-6 6-12 10-20 13l0 368 174 0c2 0 5 1 6 3 2 2 3 4 3 7l0 18c0 3-1 5-3 6-1 2-4 3-6 3l-384 0c-3 0-5-1-7-3-2-1-2-3-2-6l0-18c0-3 0-5 2-7 2-2 4-3 7-3l173 0 0-368c-7-3-14-7-20-13-6-6-10-13-13-21l-140 0c-3 0-5-1-7-2-2-2-2-4-2-7l0-18c0-3 0-5 2-7 2-2 4-2 7-2l140 0c4-11 11-20 20-27 9-7 20-10 32-10 12 0 22 3 31 10 10 7 16 16 20 27l141 0c2 0 5 0 6 2 2 2 3 4 3 7l0 18c0 3-1 5-3 7-1 1-4 2-6 2z m-51 5c6 0 11-3 16-7 4-4 7-10 7-16 0-6-3-12-7-16-5-5-10-7-16-7-7 0-12 2-16 7-5 4-7 10-7 16 0 6 2 12 7 16 4 4 9 7 16 7z m311 251c0 14-5 27-14 38-9 11-20 19-33 26-14 6-28 11-42 14-14 3-27 4-39 4-13 0-26-1-40-4-14-3-28-8-42-14-13-7-24-15-33-26-9-11-13-24-13-38 0-2 3-10 10-23 6-13 15-30 26-50 11-20 21-38 30-56 10-17 20-35 30-52 9-18 15-28 16-29 3-6 8-9 16-9 7 0 12 3 16 9 0 1 6 11 16 29 9 17 19 35 29 52 9 18 19 36 30 56 11 20 20 37 27 50 6 13 10 21 10 23z m-366 0c0 14-5 27-13 38-9 11-20 19-34 26-14 6-27 11-41 14-14 3-28 4-40 4-13 0-26-1-40-4-14-3-28-8-41-14-14-7-25-15-34-26-9-11-13-24-13-38 0-2 3-10 10-23 7-13 15-30 26-50 11-20 21-38 31-56 9-17 19-35 29-52 10-18 15-28 16-29 3-6 9-9 16-9 7 0 12 3 16 9 1 1 6 11 16 29 10 17 19 35 29 52 10 18 20 36 31 56 10 20 19 37 26 50 7 13 10 21 10 23z"></path>
+        </svg>
+                      
+          <path d="m329 256c0-20-7-37-21-52-15-14-32-21-52-21-20 0-37 7-52 21-14 15-21 32-21 52 0 20 7 37 21 52 15 14 32 21 52 21 20 0 37-7 52-21 14-15 21-32 21-52z m146-31l0 63c0 3 0 5-2 7-1 2-3 3-6 4l-52 8c-4 10-8 19-12 26 7 9 17 22 31 39 2 2 3 5 3 7 0 3-1 5-3 7-5 7-14 17-28 31-14 13-23 20-27 20-2 0-5-1-7-3l-40-31c-8 5-17 8-26 11-3 26-6 44-8 53-1 6-5 8-10 8l-64 0c-2 0-5 0-7-2-2-2-3-4-3-6l-8-53c-9-3-18-6-26-10l-40 30c-2 2-4 3-7 3-3 0-5-1-7-3-24-22-40-38-47-48-2-2-2-4-2-7 0-2 0-4 2-6 3-4 8-11 14-19 7-9 12-16 16-21-5-9-9-19-12-28l-52-8c-3 0-5-1-6-3-2-2-2-4-2-7l0-63c0-3 0-5 2-7 1-2 3-3 5-4l53-8c3-8 7-17 12-26-8-11-18-24-31-39-2-3-3-5-3-7 0-2 1-4 3-7 5-7 14-17 28-30 14-14 23-21 27-21 2 0 5 1 7 3l40 31c8-5 17-8 26-11 3-26 6-44 8-53 1-6 5-8 10-8l64 0c2 0 5 0 7 2 2 2 3 4 3 6l8 53c9 3 18 6 26 10l40-30c2-2 4-3 7-3 3 0 5 1 7 3 25 23 41 39 47 49 2 1 2 3 2 6 0 2 0 4-2 6-3 4-8 11-14 19-7 9-12 16-16 21 5 9 9 18 12 28l52 8c3 0 5 1 6 3 2 2 2 4 2 7z"></path>
+        </svg>
+                    </span>
+              <h2>03. Umsetzung bei der Allianz</h2>
+              <ul>
+                <li>Github Enterprise</li>
+                <li>Jenkins und die Buildpipline</li>
+                <li>Container Runtime Platform</li>
+                <li>Monitoring Kraft 2.0</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <!-- .end .wrap -->
+      </section>
+      <section class="slide current" style="">
+        <div class="wrap">
+
+          <ul class="flexblock steps">
+            <!-- li>a? Add blink = <ul class="flexblock steps blink">-->
+            <li>
+              <span>
+                        <svg class="fa-heartbeat" viewBox="0 0 512 512">
+            <path d="m366 293l87 0c-1 1-2 2-3 3-1 0-2 1-3 2l0 1-178 171c-4 4-8 5-13 5-5 0-9-1-13-5l-178-172c-1 0-3-2-6-5l106 0c4 0 8-2 11-4 3-3 5-6 6-10l20-80 55 190c1 4 3 7 6 10 3 2 7 3 11 3 4 0 8-1 11-3 3-3 6-6 7-10l41-138 16 32c4 6 9 10 17 10z m146-123c0 28-10 56-29 86l-106 0-32-63c-1-3-4-6-7-8-3-2-7-3-10-2-9 1-14 5-16 13l-37 123-56-196c-1-4-4-7-7-10-3-2-7-3-11-3-4 0-8 1-11 4-4 2-6 5-7 9l-33 133-121 0c-19-30-29-58-29-86 0-42 12-74 36-98 24-24 58-35 101-35 11 0 23 2 36 6 12 4 23 9 34 16 11 7 20 14 27 20 8 6 15 12 22 19 7-7 14-13 22-19 7-6 16-13 27-20 11-7 22-12 34-16 13-4 25-6 36-6 43 0 77 11 101 35 24 24 36 56 36 98z"></path>
+          </svg>
+                      </span>
+              <h2>01. Einführung in das Thema</h2>
+              <p>Was ist Prometheus, was ist Grafana, wie ist die Architektur... </p>
+            </li>
+      </section>
+      <section>
+        <h3>Herausforderungen beim Monitoring..</h3>
+        <div class="wrap size-80 zoomIn aligncenter">
+          <figure>
+            <img src="static/images/Herausforderungen.png" alt="Pixel Phone">
+          </figure>
+        </div>
+      </section>
+      </section>
+      <section class="slide current" style="">
+        <div>
+          <h1>
+            Ebenen des Monitorings
+          </h1>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="content-center">
+          <h3>Enduser</h3>
+          <pre>Performance, Services, Verfügbarkeit...</pre>
+          <h3>Applikation</h3>
+          <pre>Technisch (Statusseiten, Speicherauslastung, is alive...) Fachlich  (Aufrufe, fachliche Aussteuerungen)</pre>
+          <h3>Infrastruktur</h3>
+          <pre>CPU Auslastung, Filesystemauslaustung, Memory ....
+                    </pre>
+        </div>
+      </section>
+      <section>
+        <div class="wrap size-80 zoomIn aligncenter">
+          <figure>
+            <img src="static/images/keine_uebergreifende_loesung.png" alt="Pixel Phone">
+          </figure>
+        </div>
+      </section>
+
+      <section>
+          <div class="content-center">
+        <figure>
+          <img src="static/images/Prohmetheus.png" alt="Prometheus">
+        </figure>
+        <h2>http://prometheus.io</h2>
+      </div> 
+      </section>
+      <section>
+          <figure>
+            <img src="static/images/metrik.png" alt="Prometheus">
+          </figure>
+      </section>
+      <section>
+        <div class="content-center">
+          <h1> Grafana </h1>
+          <figure>
+            <img src="static/images/grafana.png" alt="Prometheus">
+          </figure>
+        </div>
+      </section>
+      <section>
+            <figure>
+              <img src="static/images/zielbild.png">
+            </figure>
+        </section>
+      <section class="slide current" style="">
+        <div class="wrap">
+          <h3>Inhalt des Workshops</h3>
+          <ul class="flexblock steps">
+
+            <li>
+              <div class="process step-2"></div>
+              <span>
+                            <svg class="fa-magic" viewBox="0 0 512 512">
+                <path d="m358 166l84-84-31-30-83 83z m128-84c0 5-2 10-5 13l-368 368c-3 3-7 5-12 5-6 0-10-2-13-5l-57-57c-3-3-5-8-5-13 0-5 2-9 5-13l368-367c3-4 7-5 12-5 6 0 10 1 13 5l57 56c3 4 5 8 5 13z m-386-54l28 9-28 8-9 28-8-28-28-8 28-9 8-28z m100 46l56 17-56 18-17 56-17-56-56-18 56-17 17-56z m266 137l28 8-28 9-9 28-8-28-28-9 28-8 8-28z m-183-183l28 9-28 8-9 28-8-28-28-8 28-9 8-28z"></path>
+              </svg>
+                          </span>
+              <h2>02. Praktische Einführung</h2>
+              <p>Aufbau eines Monitoringsytems mit Docker und Überwachung von einzelnen Komponenten</p>
+            </li>
+            
+          </ul>
+        </div>
+      </section>
+      <section>
+          <div class="wrap">
+          <figure>
+            <img src="static/images/Monitoringzielbild.png">
+          </figure>
+        </div>
+      </section>
+      <section>
+          <div class="wrap">
+          <figure>
+            <img src="static/images/demo.png">
+          </figure>
+        </div>
+      </section>
+
+      <section class="bg-black aligncenter slide current"  style="">
+          <span class="background light" style="background-image:url('https://source.unsplash.com/1_CMoFsPfso/')"></span>
+          <!--.wrap = container (width: 90%) -->
+          <div class="wrap">
+            <div class="grid vertical-align">
+              <div class="column">
+                <h3><strong>Prometheus</strong></h3>
+                <p>docker-compose</p>
+              </div>
+              <!-- .end .column -->
+              <div class="column">
+                <pre>
+prometheus:
+  image: prom/prometheus
+  container_name: prometheus
+  volumes:
+  - ../Docker_Monitoring_Data/prometheus:/prometheus
+  - ./prometheus/etc:/etc
+  command:
+  - '-config.file=/etc/prometheus.yml'
+  ports:
+  - '9090:9090'
+  networks:
+  - monitoring
+</pre>
+              </div>
+ </section>
+ 
+ <section class="bg-black aligncenter slide current"  style="">
+    <span class="background light" style="background-image:url('https://source.unsplash.com/1_CMoFsPfso/')"></span>
+    <!--.wrap = container (width: 90%) -->
+    <div class="wrap">
+      <div class="grid vertical-align">
+        <div class="column">
+          <h3><strong>Grafana</strong></h3>
+          <p>docker-compose</p>
+        </div>
+        <!-- .end .column -->
+        <div class="column">
+          <pre>
+grafana:
+  image: grafana/grafana
+  container_name: grafana
+  environment:
+  - GF_SECURITY_ADMIN_PASSWORD=pass
+  volumes:
+  - ./grafana/etc:/etc/grafana
+  - ../Docker_Monitoring_Data/grafana/data:/var/lib/grafana
+  depends_on:
+  - prometheus
+  ports:
+   - "3000:3000"
+   networks:
+   - monitoring
+</pre>
+        </div>
+</section>
+
+<section class="bg-black aligncenter slide current"  style="">
+    <span class="background light" style="background-image:url('https://source.unsplash.com/1_CMoFsPfso/')"></span>
+    <!--.wrap = container (width: 90%) -->
+    <div class="wrap">
+      <div class="grid vertical-align">
+        <div class="column">
+          <h3><strong>Node Exporter</strong></h3>
+          <p>docker-compose</p>
+        </div>
+        <!-- .end .column -->
+        <div class="column">
+          <pre>
+node-exporter:
+  image: prom/node-exporter
+  container_name: node-exporter
+  ports:
+  - '9100:9100'
+  networks:
+  - monitoring
+</pre>
+        </div>
+</section>
+
+<section class="bg-black aligncenter slide current"  style="">
+    <span class="background light" style="background-image:url('https://source.unsplash.com/1_CMoFsPfso/')"></span>
+    <!--.wrap = container (width: 90%) -->
+    <div class="wrap">
+      <div class="grid vertical-align">
+        <div class="column">
+          <h3><strong>Applikationsüberwachung</strong></h3>
+          <p>Am Beispiel von Spring Boot</p>
+          <p>druch zusätzliche Definition von einer Abhänigkeit können Metriken aktiviert werden</p>
+        </div>
+        <!-- .end .column -->
+        <div class="column">
+          <pre>
+
+              &lt;dependency>
+                  &lt;groupId>
+                        org.springframework.boot
+                  &lt;/groupId&gt;
+                  &lt;artifactId>
+                        spring-boot-starter-actuator
+                    &lt;/artifactId&gt
+              &lt;/dependency&gt;
+              
+  </pre>
+</div>
+</section>
+
+<section class="bg-black aligncenter slide current" id="section-96" style="">
+    <span class="background light" style="background-image:url('https://source.unsplash.com/1_CMoFsPfso/')"></span>
+    <div class="wrap size-50">
+      <h1 class="text-landing text-shadow">Opacity</h1>
+      <p><code>[class*="bg-"] &gt; .background.light</code></p>
+      <pre>&lt;section&gt;
+&lt;span class="background light" style="background-image:url('https://source.unsplash.com/1_CMoFsPfso/')"&gt;&lt;/span&gt;
+&lt;div class="wrap"&gt;
+&lt;h1&gt;Slide&lt;/h1&gt;
+&lt;/div&gt;
+&lt;/section&gt;</pre>
+    </div>
+  </section>
+
+      <section class="slide current" style="">
+          <div class="wrap">
+            <h3>Inhalt des Workshops</h3>
+            <ul class="flexblock steps">
+              <li>
+                <div class="process step-3"></div>
+                <span>
+                              <svg class="fa-balance-scale" viewBox="0 0 512 512">        
+                  <path d="m421 128l-110 201 219 0z m-366 0l-110 201 220 0z m234-55c-2 8-7 15-13 21-6 6-12 10-20 13l0 368 174 0c2 0 5 1 6 3 2 2 3 4 3 7l0 18c0 3-1 5-3 6-1 2-4 3-6 3l-384 0c-3 0-5-1-7-3-2-1-2-3-2-6l0-18c0-3 0-5 2-7 2-2 4-3 7-3l173 0 0-368c-7-3-14-7-20-13-6-6-10-13-13-21l-140 0c-3 0-5-1-7-2-2-2-2-4-2-7l0-18c0-3 0-5 2-7 2-2 4-2 7-2l140 0c4-11 11-20 20-27 9-7 20-10 32-10 12 0 22 3 31 10 10 7 16 16 20 27l141 0c2 0 5 0 6 2 2 2 3 4 3 7l0 18c0 3-1 5-3 7-1 1-4 2-6 2z m-51 5c6 0 11-3 16-7 4-4 7-10 7-16 0-6-3-12-7-16-5-5-10-7-16-7-7 0-12 2-16 7-5 4-7 10-7 16 0 6 2 12 7 16 4 4 9 7 16 7z m311 251c0 14-5 27-14 38-9 11-20 19-33 26-14 6-28 11-42 14-14 3-27 4-39 4-13 0-26-1-40-4-14-3-28-8-42-14-13-7-24-15-33-26-9-11-13-24-13-38 0-2 3-10 10-23 6-13 15-30 26-50 11-20 21-38 30-56 10-17 20-35 30-52 9-18 15-28 16-29 3-6 8-9 16-9 7 0 12 3 16 9 0 1 6 11 16 29 9 17 19 35 29 52 9 18 19 36 30 56 11 20 20 37 27 50 6 13 10 21 10 23z m-366 0c0 14-5 27-13 38-9 11-20 19-34 26-14 6-27 11-41 14-14 3-28 4-40 4-13 0-26-1-40-4-14-3-28-8-41-14-14-7-25-15-34-26-9-11-13-24-13-38 0-2 3-10 10-23 7-13 15-30 26-50 11-20 21-38 31-56 9-17 19-35 29-52 10-18 15-28 16-29 3-6 9-9 16-9 7 0 12 3 16 9 1 1 6 11 16 29 10 17 19 35 29 52 10 18 20 36 31 56 10 20 19 37 26 50 7 13 10 21 10 23z"></path>
+                </svg>      
+                  <path d="m329 256c0-20-7-37-21-52-15-14-32-21-52-21-20 0-37 7-52 21-14 15-21 32-21 52 0 20 7 37 21 52 15 14 32 21 52 21 20 0 37-7 52-21 14-15 21-32 21-52z m146-31l0 63c0 3 0 5-2 7-1 2-3 3-6 4l-52 8c-4 10-8 19-12 26 7 9 17 22 31 39 2 2 3 5 3 7 0 3-1 5-3 7-5 7-14 17-28 31-14 13-23 20-27 20-2 0-5-1-7-3l-40-31c-8 5-17 8-26 11-3 26-6 44-8 53-1 6-5 8-10 8l-64 0c-2 0-5 0-7-2-2-2-3-4-3-6l-8-53c-9-3-18-6-26-10l-40 30c-2 2-4 3-7 3-3 0-5-1-7-3-24-22-40-38-47-48-2-2-2-4-2-7 0-2 0-4 2-6 3-4 8-11 14-19 7-9 12-16 16-21-5-9-9-19-12-28l-52-8c-3 0-5-1-6-3-2-2-2-4-2-7l0-63c0-3 0-5 2-7 1-2 3-3 5-4l53-8c3-8 7-17 12-26-8-11-18-24-31-39-2-3-3-5-3-7 0-2 1-4 3-7 5-7 14-17 28-30 14-14 23-21 27-21 2 0 5 1 7 3l40 31c8-5 17-8 26-11 3-26 6-44 8-53 1-6 5-8 10-8l64 0c2 0 5 0 7 2 2 2 3 4 3 6l8 53c9 3 18 6 26 10l40-30c2-2 4-3 7-3 3 0 5 1 7 3 25 23 41 39 47 49 2 1 2 3 2 6 0 2 0 4-2 6-3 4-8 11-14 19-7 9-12 16-16 21 5 9 9 18 12 28l52 8c3 0 5 1 6 3 2 2 2 4 2 7z"></path>
+                </svg>
+                            </span>
+                <h2>03. Umsetzung bei der Allianz</h2>
+                <ul>
+                  <li>Github Enterprise</li>
+                  <li>Jenkins und die Buildpipline</li>
+                  <li>Container Runtime Platform</li>
+                  <li>Monitoring Kraft 2.0</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section class="bg-black aligncenter slide current" id="section-58" style="">
+            <span class="background" style="background-image:url('https://source.unsplash.com/p3UCTiZIU6M/')"></span>
+            <div class="wrap">
+              <h1 class="text-landing text-shadow"><strong>Danke für die Aufmerksamkeit</strong></h1>
+              <p class="text-shadow">
+              
+                  
+                
+        <path d="m329 183c0-20-7-38-21-52-15-14-32-21-52-21-20 0-37 7-52 21-14 14-21 32-21 52 0 20 7 37 21 52 15 14 32 21 52 21 20 0 37-7 52-21 14-15 21-32 21-52z m73 0c0 21-3 38-9 51l-104 221c-3 6-8 11-14 15-6 4-12 5-19 5-7 0-13-1-19-5-6-4-11-9-14-15l-104-221c-6-13-9-30-9-51 0-41 14-75 43-104 28-28 63-42 103-42 40 0 75 14 103 42 29 29 43 63 43 104z"></path>
+      </svg>
+                
+              </p>
+            </div>
+            <footer class="bg-trans-dark">
+              <div class="wrap">
+                <p>
+         
+                </p>
+              </div>
+            </footer>
+
+    </article>
+    <!-- end article -->
+  </main>
+  <!-- end main -->
+
+  <!-- A global footer
+
+     <footer role="contentinfo">
+      <div class="wrap">
+        <p>An <a href="https://github.com/webslides/webslides">open source solution</a>, by <a href="https://twitter.com/webslides">@webslides</a>.</p>
+      </div>
+    </footer>  -->
+
+  <!-- Required -->
+  <script src="static/js/webslides.js"></script>
+
+  <script>
+    window.ws = new WebSlides();
+  </script>
+
+  <script defer src="static/js/svg-icons.js"></script>
+
+</body>
+
+</html>
