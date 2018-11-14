@@ -24,7 +24,7 @@ Start Prometheus. By default, Prometheus reads its config from a file called pro
 
 ## install docker
 ```
-apt  install docker.io docker-compose
+apt update && apt -y upgrade && apt -y install docker.io docker-compose
 
 ## clone project and start
 git clone https://github.com/ckoehler99/monitoring.git
