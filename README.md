@@ -1,4 +1,4 @@
-# Skript für Monitoring workshop
+# Skript für Monitoring Workshop
 ## create server - Provider www.digitalocean.com
 ```
 doctl compute droplet create promtest --region fra1 --size 1gb --image ubuntu-18-10-x64 --ssh-keys 60022
