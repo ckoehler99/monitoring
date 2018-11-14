@@ -142,7 +142,7 @@ services:
       - ./grafana/etc:/etc/grafana
       - ../Docker_Monitoring_Data/grafana/data:/var/lib/grafana
     ports:
-      - "3001:3001"
+      - "3000:3000"
     networks:
       - monitoring
 
