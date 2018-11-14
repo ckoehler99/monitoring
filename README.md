@@ -5,24 +5,24 @@ doctl compute droplet create promtest --region fra1 --size 1gb --image ubuntu-18
 doctl compute droplet list
 doctl compute domain create promtest.digitalocean.ck99.io --ip-address 104.248.47.152 # domain zuweisen
 ```
-# access to server
+## access to server
 ```
 doctl compute ssh promtest
 ```
 
-# install prometheus on server  
+## install prometheus on server  
 ```
 wget https://github.com/prometheus/prometheus/releases/download/v2.5.0/prometheus-2.5.0.linux-amd64.tar.gz
 
 tar xfvz prometheus-2.5.0.linux-amd64.tar.gz 
 ```
-# Starting Prometheus
-Start Prometheus. By default, Prometheus reads its config from a file called prometheus.yml in the current working directory, and it stores its database in a sub-directory called data, again relative to the current working directory. Both behaviors can be changed using the flags -config.file or -storage.local.path, respectively.
+## Starting Prometheus
+Start Prometheus. By default, Prometheus reads its config from a file called prometheus.yml in the current working directory, and it stores its database in a sub-directory called data, again relative to the current working directory. 
 ```
 ./prometheus 
 ```
 
-# Docker insatallieren
+## install docker
 ```
 apt  install docker.io docker-compose
 
@@ -30,9 +30,9 @@ git clone https://github.com/ckoehler99/monitoring.git
 mkdir 
 ```
 
-# Grafana
+## Grafana
 
 
 
 
-#Kubernetes
+## Kubernetes
