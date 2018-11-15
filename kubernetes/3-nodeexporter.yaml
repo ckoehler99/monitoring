@@ -56,7 +56,7 @@ spec:
             path: /sys
             
 ---
-
+apiVersion: v1
 kind: Service
 metadata:
   name: node-exporter
