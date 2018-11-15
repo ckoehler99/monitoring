@@ -63,11 +63,10 @@ Top10 Metriken
 
 ### NodeExporter
 #### Building and running
-
+https://github.com/prometheus/node_exporter
 Prerequisites:
 
 * [Go compiler](https://golang.org/dl/)
-* RHEL/CentOS: `glibc-static` package.
 
 Building:
 
