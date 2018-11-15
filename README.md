@@ -87,6 +87,16 @@ To see all available configuration flags:
 - unter dem Reiter Dashboards die Beispiel Dashboards importieren
 
 ### Dashboard erstellen
+Abfrage:
+
+```
+probe_http_duration_seconds
+probe_http_duration_seconds{instance="https://allianz.de"}
+sum(probe_http_duration_seconds{instance="https://allianz.de"})
+```
+
+### Alerting einrichten
+- auf Dashboard ein Panel für den Alarm ergänzen
 
 ### Dashboards importieren
 #### BlackBox Exporter
@@ -95,7 +105,8 @@ To see all available configuration flags:
 
 ### Docker 
 > https://grafana.com/dashboards/893
-
+> https://grafana.com/dashboards/4271
+> https://grafana.com/dashboards/1621
 
 
 ## Kubernetes und Service Discovery
