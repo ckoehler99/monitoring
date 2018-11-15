@@ -45,3 +45,5 @@ Start Prometheus. By default, Prometheus reads its config from a file called pro
 
 
 ## Kubernetes
+Anleitung unter https://github.com/ckoehler99/monitoring/tree/master/kubernetes
+
