@@ -134,8 +134,6 @@ spec:
         volumeMounts:
         - name: prometheus-config
           mountPath: /etc/prometheus
-        - name: prometheus-rules
-          mountPath: /etc/prometheus-rules
         resources:
           limits:
             memory: "1Gi"
