@@ -31,12 +31,32 @@ git clone https://github.com/ckoehler99/monitoring.git
 
 ## Prometheus / Exporter / Konfiguration
 
-### starting prometheus
+### Start prometheus
 Start Prometheus. By default, Prometheus reads its config from a file called prometheus.yml in the current working directory, and it stores its database in a sub-directory called data, again relative to the current working directory. 
 ```
 ./prometheus 
 ```
 
+### 1. Abfragen
+Prometheus unter URL bzw. IP und Port 9090 aufrufen
+
+In Prometheus UI, gibt es folgenden Tabs:
+
+    Alerts:  Liste der Alarme
+    Graph: Abfragen und Tests
+    Status: Status der Jobs
+    Help: Link zur Prometheus Hilfe
+
+Beispielabfragen zu Prometheus:
+up - Einfache Abfrage zum Status der Jobs
+count({__name__=~".+"}) - Anzahl der Metriken
+topk(10, count by (__name__)({__name__=~".+"})) - Top10 Metriken
+
+
+### BlackBoxExporter
+
+
+### NodeExporter
 
 
 ## Grafana
