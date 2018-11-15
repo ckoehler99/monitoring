@@ -41,16 +41,19 @@ Start Prometheus. By default, Prometheus reads its config from a file called pro
 Prometheus unter URL bzw. IP und Port 9090 aufrufen
 
 In Prometheus UI, gibt es folgenden Tabs:
-
-    Alerts:  Liste der Alarme
-    Graph: Abfragen und Tests
-    Status: Status der Jobs
-    Help: Link zur Prometheus Hilfe
-
-Beispielabfragen zu Prometheus:
-up - Einfache Abfrage zum Status der Jobs
-count({__name__=~".+"}) - Anzahl der Metriken
-topk(10, count by (__name__)({__name__=~".+"})) - Top10 Metriken
+```
+Alerts:  Liste der Alarme
+Graph: Abfragen und Tests
+Status: Status der Jobs
+Help: Link zur Prometheus Hilfe
+```
+#### Beispielabfragen zu Prometheus:
+Einfache Abfrage zum Status der Jobs
+```up```
+Anzahl der Metriken
+```count({__name__=~".+"})``` 
+Top10 Metriken
+```topk(10, count by (__name__)({__name__=~".+"})) ```
 
 
 ### BlackBoxExporter
