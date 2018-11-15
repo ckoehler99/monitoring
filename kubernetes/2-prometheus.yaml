@@ -10,16 +10,10 @@ data:
       scrape_timeout: 5s
       evaluation_interval: 5s
 
-    rule_files:
-    - "/etc/prometheus-rules/*.yaml"
-
     scrape_configs:
-    
     - job_name: 'kubernetes-pods'
-
       kubernetes_sd_configs:
       - role: pod
-
       relabel_configs:
       - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
         action: keep
@@ -48,7 +42,6 @@ data:
       - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_team]
         action: replace
         target_label: team
-
       sample_limit: 50000
 
 ---
@@ -141,9 +134,6 @@ spec:
       - name: prometheus-config
         configMap:
           name: prometheus-config
-      - name: prometheus-rules
-        configMap:
-          name: prometheus-rules
 
 ---
 
