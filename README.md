@@ -59,7 +59,10 @@ Top10 Metriken
 
 
 ### BlackBoxExporter
-
+über docker-compose startem
+```
+docker-compose up -d blackbox-exporter
+```
 
 ### NodeExporter
 #### Building and running
