@@ -93,6 +93,9 @@ To see all available configuration flags:
 > https://grafana.com/dashboards/5345
 > https://grafana.com/dashboards/7587
 
+### Docker 
+> https://grafana.com/dashboards/893
+
 
 
 ## Kubernetes und Service Discovery
