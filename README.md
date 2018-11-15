@@ -50,8 +50,10 @@ Help: Link zur Prometheus Hilfe
 #### Beispielabfragen zu Prometheus:
 Einfache Abfrage zum Status der Jobs
 ```up```
+
 Anzahl der Metriken
 ```count({__name__=~".+"})``` 
+
 Top10 Metriken
 ```topk(10, count by (__name__)({__name__=~".+"})) ```
 
