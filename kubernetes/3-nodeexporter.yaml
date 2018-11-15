@@ -19,7 +19,6 @@ spec:
       annotations:
         scheduler.alpha.kubernetes.io/critical-pod: ''
     spec:
-      priorityClassName: system-node-critical
       containers:
         - name: prometheus-node-exporter
           image: "prom/node-exporter:v0.15.2"
