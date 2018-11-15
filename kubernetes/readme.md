@@ -4,6 +4,8 @@ Apply the full directory to your Kubernetes cluster (make sure to have the corre
 
 ```
 kubectl apply -f .
+kubectl apply -f kubernetes/3-nodeexporter.yaml
+kubectl apply -f kubernetes/4-cadvisor.yaml
 ```
 
 Check the status of the pods:
