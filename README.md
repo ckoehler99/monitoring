@@ -3,9 +3,9 @@
 ### create server - Provider www.digitalocean.com
 Digitalocean ist ein Cloudprovider mit dem einfach getestet werden kann. Die CLI doctl muss vorher installiert werden https://www.digitalocean.com/community/tutorials/how-to-use-doctl-the-official-digitalocean-command-line-client
 ```
-doctl compute droplet create promtest --region fra1 --size 2gb --image ubuntu-18-10-x64 --ssh-keys 60022
+doctl compute droplet create promtest --region fra1 --size 2gb --image ubuntu-18-10-x64
 doctl compute droplet list
-doctl compute domain create promworkshop.digitalocean.ck99.io --ip-address 104.248.47.152 # domain zuweisen
+doctl compute domain create promworkshop.digitalocean.ck99.io --ip-address 104.248.47.152 # domain zuweisen. Dieser Schritt ist optional. Es kann auch mit der IP Adresse dirket die URLs aufgerufen werden.
 ```
 ### access to server
 ```
@@ -36,6 +36,8 @@ Start Prometheus. By default, Prometheus reads its config from a file called pro
 ```
 ./prometheus 
 ```
+
+>Links zu den Appliaktionen sind in der Datei https://github.com/ckoehler99/monitoring/blob/master/links.md hinterlegt. Die URL kann auch durch die IP Adresse des Server ersetzt werden.
 
 ### 1. Abfragen
 Prometheus unter URL bzw. IP und Port 9090 aufrufen
