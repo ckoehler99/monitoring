@@ -9,7 +9,8 @@ Digitalocean ist ein Cloudprovider mit dem einfach getestet werden kann. Die CLI
 ```
 doctl compute droplet create promtest --region fra1 --size 2gb --image ubuntu-18-10-x64
 doctl compute droplet list
-doctl compute domain create promworkshop.digitalocean.ck99.io --ip-address 104.248.47.152 # domain zuweisen. Dieser Schritt ist optional. Es kann auch mit der IP Adresse dirket die URLs aufgerufen werden.
+doctl compute domain create promworkshop.digitalocean.ck99.io --ip-address 104.248.47.152 
+# domain zuweisen. Dieser Schritt ist optional. Es kann auch mit der IP Adresse dirket die URLs aufgerufen werden.
 ```
 ### access to server
 ```
