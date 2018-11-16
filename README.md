@@ -59,7 +59,7 @@ Top10 Metriken
 
 
 ### BlackBoxExporter
-über docker-compose startem
+Über docker-compose starten. Dazu in das Verzeichnis "Docker_Monitoring" wechseln. Von dort kann das dann direkt aufgerufen werden.
 ```
 docker-compose up -d blackbox-exporter
 ```
@@ -85,6 +85,11 @@ To see all available configuration flags:
 
 ## Grafana
 ### Anmelden und erste Konfiguration
+In den Ordner "Docker_Monitoring" wechsel und dort mittels docker-compose Grafana starten. 
+```
+docker-compose up -d grafana 
+```
+
 - Anmeldung mit User:"Admin" und Passwort:"pass"
 - Einrichtung der Datasource "prometheus" in unserem Beispiel auf http://promworkshop.digitalocean.ck99.io:9090
 - unter dem Reiter Dashboards die Beispiel Dashboards importieren
