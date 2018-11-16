@@ -1,4 +1,8 @@
 # Skript für Monitoring Workshop
+
+>Alle Links zu den Applikationen sind in der Datei https://github.com/ckoehler99/monitoring/blob/master/links.md hinterlegt. Die URL kann auch durch die IP Adresse des Server ersetzt werden.
+
+
 ## Setup Server
 ### create server - Provider www.digitalocean.com
 Digitalocean ist ein Cloudprovider mit dem einfach getestet werden kann. Die CLI doctl muss vorher installiert werden https://www.digitalocean.com/community/tutorials/how-to-use-doctl-the-official-digitalocean-command-line-client
@@ -36,8 +40,6 @@ Start Prometheus. By default, Prometheus reads its config from a file called pro
 ```
 ./prometheus 
 ```
-
->Links zu den Appliaktionen sind in der Datei https://github.com/ckoehler99/monitoring/blob/master/links.md hinterlegt. Die URL kann auch durch die IP Adresse des Server ersetzt werden.
 
 ### 1. Abfragen
 Prometheus unter URL bzw. IP und Port 9090 aufrufen
