@@ -2,7 +2,6 @@
 
 >Alle Links zu den Applikationen sind in der Datei https://github.com/ckoehler99/monitoring/blob/master/links.md hinterlegt. Die URL kann auch durch die IP Adresse des Server ersetzt werden.
 
-
 ## Setup Server
 ### create server - Provider www.digitalocean.com
 Digitalocean ist ein Cloudprovider mit dem einfach getestet werden kann. Die CLI doctl muss vorher installiert werden https://www.digitalocean.com/community/tutorials/how-to-use-doctl-the-official-digitalocean-command-line-client
@@ -19,12 +18,6 @@ doctl compute domain create promworkshop.digitalocean.ck99.io --ip-address 104.2
 doctl compute ssh promtest
 ```
 
-### install prometheus on server 
-```
-wget https://github.com/prometheus/prometheus/releases/download/v2.5.0/prometheus-2.5.0.linux-amd64.tar.gz
-
-tar xfvz prometheus-2.5.0.linux-amd64.tar.gz 
-```
 ### install docker
 Docker und docker-compose werden für einige Services (BlackBox-Exporter, Grafana usw.) benutzt.
 Diese Services skalieren mittels Docker sehr gut und können bei entsprechendem Setup hochverfügbar betrieben werden. 
@@ -36,10 +29,20 @@ apt update && apt -y upgrade && apt -y install docker.io docker-compose golang-g
 git clone https://github.com/ckoehler99/monitoring.git
 ```
 
+### install prometheus on server 
+```
+wget https://github.com/prometheus/prometheus/releases/download/v2.5.0/prometheus-2.5.0.linux-amd64.tar.gz
+
+tar xfvz prometheus-2.5.0.linux-amd64.tar.gz 
+```
+
 ## Prometheus / Exporter / Konfiguration
 
 ### Start prometheus
-Start Prometheus. By default, Prometheus reads its config from a file called prometheus.yml in the current working directory, and it stores its database in a sub-directory called data, again relative to the current working directory. 
+Zum Start von Prometheus in das Prometheus-Verzeichnis wechseln. 
+
+>By default, Prometheus reads its config from a file called prometheus.yml in the current working directory, and it stores its database in a sub-directory called data, again relative to the current working directory. 
+
 ```
 ./prometheus 
 ```
